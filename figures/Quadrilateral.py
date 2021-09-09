@@ -28,8 +28,8 @@ class Quadrilateral:
         return Vertex([new_x+self.center.x, new_y+self.center.y])
 
     def pos_random(self):
-        rx = rm.randint(0, 250)
-        ry = rm.randint(0, 250)
+        rx = rm.randint(0, 0)
+        ry = rm.randint(0, 0)
         self._vertex_a.x = self.vertex_a.x + rx
         self._vertex_b.x = self.vertex_b.x + rx
         self._vertex_c.x = self.vertex_c.x + rx

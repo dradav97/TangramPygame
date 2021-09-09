@@ -32,8 +32,8 @@ class Triangle:
         pygame.draw.polygon(self.screen, self.color, (self.vertex_a.vertex, self.vertex_b.vertex, self.vertex_c.vertex))
 
     def pos_random(self):
-        rx = rm.randint(0, 200)
-        ry = rm.randint(0, 200)
+        rx = rm.randint(0, 0)
+        ry = rm.randint(0, 0)
         print(self.vertex_a )
         self._vertex_a.x = self.vertex_a.x + rx
         self._vertex_b.x = self.vertex_b.x + rx
