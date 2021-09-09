@@ -1,9 +1,11 @@
+from figures.Quadrilateral import Quadrilateral
 import pygame
 
 import sys
 from Button import Button
 from Shape import Shape
-import collision as c
+from figures.Triangle import Triangle
+from figures.Vertex import Vertex
 
 
 class TangramGame:
@@ -24,7 +26,7 @@ class TangramGame:
 
         # add components
         self.play_button = Button(self,"Play")
-        self.shape = Shape(self, self.color_black, (0,0), [(10, 10), (10, 80), (20, 10), (20, 40)])
+        self.shape = Quadrilateral(Vertex([10, 30]), Vertex([10, 80]), Vertex([90, 80]), Vertex([90, 30]), Vertex([10, 30]), self.screen)
     
     def run_game(self):
         # 
@@ -63,7 +65,7 @@ class TangramGame:
                 elif event.type == pygame.KEYDOWN:
                     self.control= False
 
-           
+
 
 
             #draw button
