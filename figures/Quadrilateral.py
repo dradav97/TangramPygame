@@ -1,9 +1,11 @@
 from math import cos, sin
 from figures.Vertex import Vertex
 import pygame
+import random as rm
+
 
 class Quadrilateral:
-    def __init__(self, vertex_a, vertex_b, vertex_c, vertex_d, center, screen):
+    def __init__(self, vertex_a, vertex_b, vertex_c, vertex_d, center, screen, color):
         self._vertex_a = vertex_a
         self._vertex_b = vertex_b
         self._vertex_c = vertex_c
@@ -11,6 +13,8 @@ class Quadrilateral:
         self._center = center
         self.screen = screen
         self.delta = 5
+        self.color = color
+        self.pos_random()
 
     def rotate(self, grades):
         self.vertex_a = self.rotate_vertex(self.vertex_a.x-self.center.x, self.vertex_a.y-self.center.y, grades)
@@ -23,8 +27,22 @@ class Quadrilateral:
         new_x = x*cos(alpha) - y*sin(alpha)
         return Vertex([new_x+self.center.x, new_y+self.center.y])
 
+    def pos_random(self):
+        rx = rm.randint(0, 250)
+        ry = rm.randint(0, 250)
+        self._vertex_a.x = self.vertex_a.x + rx
+        self._vertex_b.x = self.vertex_b.x + rx
+        self._vertex_c.x = self.vertex_c.x + rx
+        self._vertex_d.x = self.vertex_d.x + rx
+        self._center.y = self.center.x + rx
+        self._vertex_a.y = self.vertex_a.y + ry
+        self._vertex_b.y = self.vertex_b.y + ry
+        self._vertex_c.y = self.vertex_c.y + ry
+        self._vertex_d.y = self.vertex_d.y + ry
+        self._center.y = self.center.y + ry
+
     def draw(self):
-        pygame.draw.polygon(self.screen, (0, 255, 0), (self.vertex_a.vertex, self.vertex_b.vertex, self.vertex_c.vertex, self.vertex_d.vertex))
+        pygame.draw.polygon(self.screen, self.color, (self.vertex_a.vertex, self.vertex_b.vertex, self.vertex_c.vertex, self.vertex_d.vertex))
 
     @property
     def move_l(self):
