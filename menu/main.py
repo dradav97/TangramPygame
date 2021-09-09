@@ -37,6 +37,7 @@ class TangramGame:
 
         # add components
         self.play_button = Button(self,"Play")
+        self.win_button = Button(self,"Felicitaciones has completado el tangram")
         #self.tq = Quadrilateral(Vertex([10, 30]), Vertex([10, 80]), Vertex([90, 80]), Vertex([90, 30]), Vertex([10, 30]), self.screen)
         factor = 5
         a = Vertex(np.array([0, 0]) * factor)
@@ -126,11 +127,14 @@ class TangramGame:
                         self.tf.control = True
                     if event.key == pygame.K_g:
                         self.tg.control = True
+                    if event.key == pygame.K_1:
+                        print("\n\nFelicitaciones completaste el tangram!!!!!!!\n\n")
+                        sys.exit()
+
                     
-                if self.control:
-                    print("corriendo")
-                else:
-                    print("sale")
+                    
+                
+                    
                 if event.type == pygame.KEYDOWN:
                     if event.key== pygame.K_RIGHT and self.tq.control:
                         self.tq.move_r
@@ -380,7 +384,7 @@ class TangramGame:
 
     def check_button(self,mousePos):
         if self.play_button.rect.collidepoint(mousePos):
-            print(f"{mousePos}")
+            
             self.game_activated = True
 
     def check_tqs(self, mousePos):

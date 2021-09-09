@@ -31,12 +31,12 @@ class Triangle:
         return Vertex([new_x+self.center.x, new_y+self.center.y])
 
     def draw(self):
-        pygame.draw.polygon(self.screen, (0, 255, 0), (self.vertex_a.vertex, self.vertex_b.vertex, self.vertex_c.vertex))
+        pygame.draw.polygon(self.screen, self.color, (self.vertex_a.vertex, self.vertex_b.vertex, self.vertex_c.vertex))
     
     def pos_random(self):
         rx = rm.randint(0, 100)
         ry = rm.randint(0, 100)
-        print(self.vertex_a )
+        
         self._vertex_a.x = self.vertex_a.x + rx
         self._vertex_b.x = self.vertex_b.x + rx
         self._vertex_c.x = self.vertex_c.x + rx
