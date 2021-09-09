@@ -382,6 +382,54 @@ class TangramGame:
         
         pass
 
+    def validate(self):
+        control = False
+        if self.tq.point_distance(self.tw.vertex_c):
+            control= True
+        else:
+            control= False
+        if self.tw.point_distance(self.tf.vertex_c):
+            control= True
+        else:
+            control= False
+        if self.te.point_distance(self.tt.vertex_c):
+            control= True
+        else:
+            control= False
+        if self.tt.point_distance(self.tg.vertex_c):
+            control= True
+        else:
+            control= False
+        if self.ty.point_distance(self.tu.vertex_c):
+            control= True
+        else:
+            control= False
+        if self.tu.point_distance(self.tp.vertex_c):
+            control= True
+        else:
+            control= False
+        if self.tp.point_distance(self.to.vertex_c):
+            control= True
+        else:
+            control= False
+        if self.to.point_distance(self.ts.vertex_c):
+            control= True
+        else:
+            control= False
+        if self.ts.point_distance(self.ta.vertex_c):
+            control= True
+        else:
+            control= False
+        if self.tq.point_distance(self.tg.vertex_c):
+            control= True
+        else:
+            control= False
+        if self.ts.point_distance(self.to.vertex_c):
+            control= True
+        else:
+            control= False
+        
+
     def check_button(self,mousePos):
         if self.play_button.rect.collidepoint(mousePos):
             

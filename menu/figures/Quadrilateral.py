@@ -2,6 +2,7 @@ from math import cos, sin
 from figures.Vertex import Vertex
 import pygame
 import random as rm
+import math
 
 class Quadrilateral:
     def __init__(self, vertex_a, vertex_b, vertex_c, vertex_d, center, screen, color):
@@ -11,7 +12,7 @@ class Quadrilateral:
         self._vertex_d = vertex_d
         self._center = center
         self.screen = screen
-        self.delta = 5
+        self.delta = 20
         self.color = color
         self.pos_random()
         self.control= False
@@ -32,8 +33,8 @@ class Quadrilateral:
         return Vertex([new_x+self.center.x, new_y+self.center.y])
 
     def pos_random(self):
-        rx = rm.randint(0, 100)
-        ry = rm.randint(0, 100)
+        rx = rm.randint(0, 50)
+        ry = rm.randint(0, 50)
         self._vertex_a.x = self.vertex_a.x + rx
         self._vertex_b.x = self.vertex_b.x + rx
         self._vertex_c.x = self.vertex_c.x + rx
@@ -111,3 +112,10 @@ class Quadrilateral:
     @vertex_d.setter
     def vertex_d(self, value):
         self._vertex_d = value
+    
+    def point_distance(self, point2):
+        d = math.pow(math.pow((self.center[0]-point2[0]),2)+math.pow((self.center[0]-point2[0]),2))
+        if d<5:
+            return True
+        return False
+
