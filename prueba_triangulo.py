@@ -95,7 +95,7 @@ ts = Triangle(deepcopy(o), deepcopy(c), deepcopy(h), deepcopy(o), screen, BLUE)
 
 cr = Quadrilateral(deepcopy(n), deepcopy(j), deepcopy(f), deepcopy(i), deepcopy(n), screen, ORANGE)
 ce = Quadrilateral(deepcopy(a), deepcopy(l), deepcopy(o), deepcopy(j), deepcopy(a), screen, YELLOW)
-ct = Quadrilateral(deepcopy(b), deepcopy(i), deepcopy(p), deepcopy(m), deepcopy(b), screen,GREEN )
+ct = Quadrilateral(deepcopy(b), deepcopy(i), deepcopy(p), deepcopy(m), deepcopy(b), screen, GREEN)
 cd = Quadrilateral(deepcopy(o), deepcopy(h), deepcopy(t), deepcopy(s), deepcopy(o), screen, GREEN)
 cf = Quadrilateral(deepcopy(s), deepcopy(t), deepcopy(k), deepcopy(p), deepcopy(s), screen, RED)
 cg = Quadrilateral(deepcopy(m), deepcopy(p), deepcopy(k), deepcopy(d), deepcopy(d), screen, YELLOW)
