@@ -33,11 +33,11 @@ while True:
     # pygame.draw.polygon(screen, BLACK, [A, B, C, D], 2)
     # pygame.draw.polygon(screen, (0,255,0), (t.vertex_a.vertex, t.vertex_b.vertex , t.vertex_c.vertex ), 2)
 
-    t.draw()
+    c.draw()
     #pygame.draw.polygon((screen), (0, 255, 0), (c.vertex_a.vertex, c.vertex_b.vertex, c.vertex_c.vertex, c.vertex_d.vertex))
-
+    c.move_l
     g = -0.00172
-    t.rotate(g)
+    #c.rotate(g)
 
     clock.tick(80)
 

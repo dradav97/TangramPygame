@@ -26,6 +26,35 @@ class Quadrilateral:
         pygame.draw.polygon(self.screen, (0, 255, 0), (self.vertex_a.vertex, self.vertex_b.vertex, self.vertex_c.vertex, self.vertex_d.vertex))
 
     @property
+    def move_l(self):
+        self.vertex_a.x = self.vertex_a.x - 10
+        self.vertex_b.x = self.vertex_b.x - 10
+        self.vertex_c.x = self.vertex_c.x - 10
+        self.vertex_d.x = self.vertex_d.x - 10
+
+    @property
+    def move_r(self):
+        self.vertex_a.x = self.vertex_a.x + 10
+        self.vertex_b.x = self.vertex_b.x + 10
+        self.vertex_c.x = self.vertex_c.x + 10
+        self.vertex_d.x = self.vertex_d.x + 10
+
+    @property
+    def move_u(self):
+        self.vertex_a.y = self.vertex_a.y - 10
+        self.vertex_b.y = self.vertex_b.y - 10
+        self.vertex_c.y = self.vertex_c.y - 10
+        self.vertex_d.y = self.vertex_d.y - 10
+
+    @property
+    def move_d(self):
+        self.vertex_a.y = self.vertex_a.y + 10
+        self.vertex_b.y = self.vertex_b.y + 10
+        self.vertex_c.y = self.vertex_c.y + 10
+        self.vertex_d.y = self.vertex_d.y + 10
+
+
+    @property
     def vertex_a(self):
         return self._vertex_a
 
