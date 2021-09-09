@@ -17,6 +17,7 @@ class Triangle:
         self.delta = 10
         self.color = color
         self.pos_random()
+        self.control= False
 
     def rotate(self):
         grades= 1.5708

@@ -14,6 +14,7 @@ class Quadrilateral:
         self.delta = 5
         self.color = color
         self.pos_random()
+        self.control= False
     
     def draw(self):
         pygame.draw.polygon(self.screen, self.color, (self.vertex_a.vertex, self.vertex_b.vertex, self.vertex_c.vertex, self.vertex_d.vertex))
