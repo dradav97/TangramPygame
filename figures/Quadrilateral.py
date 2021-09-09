@@ -34,12 +34,12 @@ class Quadrilateral:
         self._vertex_b.x = self.vertex_b.x + rx
         self._vertex_c.x = self.vertex_c.x + rx
         self._vertex_d.x = self.vertex_d.x + rx
-        self._center.y = self.center.x + rx
+
         self._vertex_a.y = self.vertex_a.y + ry
         self._vertex_b.y = self.vertex_b.y + ry
         self._vertex_c.y = self.vertex_c.y + ry
         self._vertex_d.y = self.vertex_d.y + ry
-        self._center.y = self.center.y + ry
+        self.center = self.vertex_a
 
     def draw(self):
         pygame.draw.polygon(self.screen, self.color, (self.vertex_a.vertex, self.vertex_b.vertex, self.vertex_c.vertex, self.vertex_d.vertex))

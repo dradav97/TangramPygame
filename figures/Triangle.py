@@ -38,11 +38,11 @@ class Triangle:
         self._vertex_a.x = self.vertex_a.x + rx
         self._vertex_b.x = self.vertex_b.x + rx
         self._vertex_c.x = self.vertex_c.x + rx
-        self._center.y = self.center.x + rx
+
         self._vertex_a.y = self.vertex_a.y + ry
         self._vertex_b.y = self.vertex_b.y + ry
         self._vertex_c.y = self.vertex_c.y + ry
-        self._center.y = self.center.y + ry
+        self._center = self.vertex_a
 
 
     @property
