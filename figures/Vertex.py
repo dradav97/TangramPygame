@@ -1,28 +1,28 @@
 class Vertex:
     def __init__(self, vertex):
 
-        self.vertex = vertex
+        self._vertex = vertex
 
     @property
     def x(self):
-        return self.vertex[0]
+        return self._vertex[0]
 
     @property
     def y(self):
-        return self.vertex[1]
+        return self._vertex[1]
 
     @property
     def vertex(self):
-        return self.vertex
+        return self._vertex
 
     @x.setter
     def x(self, value):
-        self.vertex[0] = value
+        self._vertex[0] = value
 
     @y.setter
     def y(self, value):
-        self.vertex[1] = value
+        self._vertex[1] = value
 
     @vertex.setter
     def vertex(self, new_vertex):
-        self.vertex = new_vertex
+        self._vertex = new_vertex
