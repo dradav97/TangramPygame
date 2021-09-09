@@ -2,17 +2,21 @@
 from math import cos, sin
 from figures.Vertex import Vertex
 import pygame
+import random as rm
 
 
 class Triangle:
 
-    def __init__(self, vertex_a, vertex_b, vertex_c, center, screen):
+    def __init__(self, vertex_a, vertex_b, vertex_c, center, screen, color):
 
         self._vertex_a = vertex_a
         self._vertex_b = vertex_b
         self._vertex_c = vertex_c
         self._center = center
         self.screen = screen
+        self.delta = 10
+        self.color = color
+        self.pos_random()
 
     def rotate(self):
         grades= 1.5708
@@ -28,29 +32,42 @@ class Triangle:
     def draw(self):
         pygame.draw.polygon(self.screen, (0, 255, 0), (self.vertex_a.vertex, self.vertex_b.vertex, self.vertex_c.vertex))
     
+    def pos_random(self):
+        rx = rm.randint(0, 200)
+        ry = rm.randint(0, 200)
+        print(self.vertex_a )
+        self._vertex_a.x = self.vertex_a.x + rx
+        self._vertex_b.x = self.vertex_b.x + rx
+        self._vertex_c.x = self.vertex_c.x + rx
+        self._center.y = self.center.x + rx
+        self._vertex_a.y = self.vertex_a.y + ry
+        self._vertex_b.y = self.vertex_b.y + ry
+        self._vertex_c.y = self.vertex_c.y + ry
+        self._center.y = self.center.y + ry
+
     @property
     def move_l(self):
-        self.vertex_a.x = self.vertex_a.x - 10
-        self.vertex_b.x = self.vertex_b.x - 10
-        self.vertex_c.x = self.vertex_c.x - 10
+        self.vertex_a.x = self.vertex_a.x - self.delta
+        self.vertex_b.x = self.vertex_b.x - self.delta
+        self.vertex_c.x = self.vertex_c.x - self.delta
 
     @property
     def move_r(self):
-        self.vertex_a.x = self.vertex_a.x + 10
-        self.vertex_b.x = self.vertex_b.x + 10
-        self.vertex_c.x = self.vertex_c.x + 10
+        self.vertex_a.x = self.vertex_a.x + self.delta
+        self.vertex_b.x = self.vertex_b.x + self.delta
+        self.vertex_c.x = self.vertex_c.x + self.delta
 
     @property
     def move_u(self):
-        self.vertex_a.y = self.vertex_a.y - 10
-        self.vertex_b.y = self.vertex_b.y - 10
-        self.vertex_c.y = self.vertex_c.y - 10
+        self.vertex_a.y = self.vertex_a.y - self.delta
+        self.vertex_b.y = self.vertex_b.y - self.delta
+        self.vertex_c.y = self.vertex_c.y - self.delta
 
     @property
     def move_d(self):
-        self.vertex_a.y = self.vertex_a.y + 10
-        self.vertex_b.y = self.vertex_b.y + 10
-        self.vertex_c.y = self.vertex_c.y + 10
+        self.vertex_a.y = self.vertex_a.y + self.delta
+        self.vertex_b.y = self.vertex_b.y + self.delta
+        self.vertex_c.y = self.vertex_c.y + self.delta
 
     @property
     def vertex_a(self):
