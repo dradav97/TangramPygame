@@ -39,7 +39,7 @@ while True:
     g = -0.00172
     #c.rotate(g)
 
-    clock.tick(80)
+    clock.tick(5)
 
     # Aqui dibujamos
     pygame.display.flip()
