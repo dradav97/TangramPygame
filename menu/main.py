@@ -51,13 +51,13 @@ class TangramGame:
                         self.control = True
                 if event.type == pygame.KEYDOWN:
                     if event.key== pygame.K_RIGHT:
-                        self.shape.movex(True)
+                        self.shape.move_r
                     if event.key== pygame.K_DOWN:
-                        self.shape.movey(True)
+                        self.shape.move_d
                     if event.key== pygame.K_LEFT:
-                        self.shape.movex(False)
+                        self.shape.move_l
                     if event.key== pygame.K_UP:
-                        self.shape.movey(False)
+                        self.shape.move_u
                     if event.key== pygame.K_SPACE:
                         self.shape.rotate()
 
