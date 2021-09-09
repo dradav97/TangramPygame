@@ -24,7 +24,7 @@ class TangramGame:
 
         # add components
         self.play_button = Button(self,"Play")
-        self.shape = Shape(self, self.color_black, (0,0), [(10, 10), (10, 80), (20, 10), (20, 80)])
+        self.shape = Shape(self, self.color_black, (0,0), [(10, 10), (10, 80), (20, 10), (20, 40)])
     
     def run_game(self):
         # 
@@ -34,7 +34,7 @@ class TangramGame:
             
             # even loop
             for event in pygame.event.get():
-                print(event)
+                #print(event)
                 if event.type == pygame.QUIT:
                     sys.exit()
                 
