@@ -35,11 +35,11 @@ while True:
 
     c.draw()
     #pygame.draw.polygon((screen), (0, 255, 0), (c.vertex_a.vertex, c.vertex_b.vertex, c.vertex_c.vertex, c.vertex_d.vertex))
-    c.move_l
+    c.move_r
     g = -0.00172
     #c.rotate(g)
 
-    clock.tick(80)
+    clock.tick(5)
 
     # Aqui dibujamos
     pygame.display.flip()
