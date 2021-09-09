@@ -13,6 +13,7 @@ class Triangle:
         self._vertex_c = vertex_c
         self._center = center
         self.screen = screen
+        self.delta = 10
 
     def rotate(self, grades):
         
@@ -30,27 +31,27 @@ class Triangle:
 
     @property
     def move_l(self):
-        self.vertex_a.x = self.vertex_a.x - 10
-        self.vertex_b.x = self.vertex_b.x - 10
-        self.vertex_c.x = self.vertex_c.x - 10
+        self.vertex_a.x = self.vertex_a.x - self.delta
+        self.vertex_b.x = self.vertex_b.x - self.delta
+        self.vertex_c.x = self.vertex_c.x - self.delta
 
     @property
     def move_r(self):
-        self.vertex_a.x = self.vertex_a.x + 10
-        self.vertex_b.x = self.vertex_b.x + 10
-        self.vertex_c.x = self.vertex_c.x + 10
+        self.vertex_a.x = self.vertex_a.x + self.delta
+        self.vertex_b.x = self.vertex_b.x + self.delta
+        self.vertex_c.x = self.vertex_c.x + self.delta
 
     @property
     def move_u(self):
-        self.vertex_a.y = self.vertex_a.y - 10
-        self.vertex_b.y = self.vertex_b.y - 10
-        self.vertex_c.y = self.vertex_c.y - 10
+        self.vertex_a.y = self.vertex_a.y - self.delta
+        self.vertex_b.y = self.vertex_b.y - self.delta
+        self.vertex_c.y = self.vertex_c.y - self.delta
 
     @property
     def move_d(self):
-        self.vertex_a.y = self.vertex_a.y + 10
-        self.vertex_b.y = self.vertex_b.y + 10
-        self.vertex_c.y = self.vertex_c.y + 10
+        self.vertex_a.y = self.vertex_a.y + self.delta
+        self.vertex_b.y = self.vertex_b.y + self.delta
+        self.vertex_c.y = self.vertex_c.y + self.delta
 
 
 

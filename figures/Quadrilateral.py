@@ -10,6 +10,7 @@ class Quadrilateral:
         self._vertex_d = vertex_d
         self._center = center
         self.screen = screen
+        self.delta = 5
 
     def rotate(self, grades):
         self.vertex_a = self.rotate_vertex(self.vertex_a.x-self.center.x, self.vertex_a.y-self.center.y, grades)
@@ -27,31 +28,31 @@ class Quadrilateral:
 
     @property
     def move_l(self):
-        self.vertex_a.x = self.vertex_a.x - 10
-        self.vertex_b.x = self.vertex_b.x - 10
-        self.vertex_c.x = self.vertex_c.x - 10
-        self.vertex_d.x = self.vertex_d.x - 10
+        self.vertex_a.x = self.vertex_a.x - self.delta
+        self.vertex_b.x = self.vertex_b.x - self.delta
+        self.vertex_c.x = self.vertex_c.x - self.delta
+        self.vertex_d.x = self.vertex_d.x - self.delta
 
     @property
     def move_r(self):
-        self.vertex_a.x = self.vertex_a.x + 10
-        self.vertex_b.x = self.vertex_b.x + 10
-        self.vertex_c.x = self.vertex_c.x + 10
-        self.vertex_d.x = self.vertex_d.x + 10
+        self.vertex_a.x = self.vertex_a.x + self.delta
+        self.vertex_b.x = self.vertex_b.x + self.delta
+        self.vertex_c.x = self.vertex_c.x + self.delta
+        self.vertex_d.x = self.vertex_d.x + self.delta
 
     @property
     def move_u(self):
-        self.vertex_a.y = self.vertex_a.y - 10
-        self.vertex_b.y = self.vertex_b.y - 10
-        self.vertex_c.y = self.vertex_c.y - 10
-        self.vertex_d.y = self.vertex_d.y - 10
+        self.vertex_a.y = self.vertex_a.y - self.delta
+        self.vertex_b.y = self.vertex_b.y - self.delta
+        self.vertex_c.y = self.vertex_c.y - self.delta
+        self.vertex_d.y = self.vertex_d.y - self.delta
 
     @property
     def move_d(self):
-        self.vertex_a.y = self.vertex_a.y + 10
-        self.vertex_b.y = self.vertex_b.y + 10
-        self.vertex_c.y = self.vertex_c.y + 10
-        self.vertex_d.y = self.vertex_d.y + 10
+        self.vertex_a.y = self.vertex_a.y + self.delta
+        self.vertex_b.y = self.vertex_b.y + self.delta
+        self.vertex_c.y = self.vertex_c.y + self.delta
+        self.vertex_d.y = self.vertex_d.y + self.delta
 
 
     @property
