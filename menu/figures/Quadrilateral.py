@@ -115,7 +115,5 @@ class Quadrilateral:
     
     def point_distance(self, point2):
         d = math.pow(math.pow((self.center[0]-point2[0]),2)+math.pow((self.center[0]-point2[0]),2))
-        if d<5:
-            return True
-        return False
+        return d
 

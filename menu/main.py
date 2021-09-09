@@ -384,50 +384,51 @@ class TangramGame:
 
     def validate(self):
         control = False
-        if self.tq.point_distance(self.tw.vertex_c):
+        if self.tq.point_distance(self.tw.vertex_c)<5:
             control= True
         else:
             control= False
-        if self.tw.point_distance(self.tf.vertex_c):
+        if self.tw.point_distance(self.tf.vertex_c)<5:
             control= True
         else:
             control= False
-        if self.te.point_distance(self.tt.vertex_c):
+        if self.te.point_distance(self.tt.vertex_c)<5:
             control= True
         else:
             control= False
-        if self.tt.point_distance(self.tg.vertex_c):
+        if self.tt.point_distance(self.tg.vertex_c)<5:
             control= True
         else:
             control= False
-        if self.ty.point_distance(self.tu.vertex_c):
+        if self.ty.point_distance(self.tu.vertex_c)<5:
             control= True
         else:
             control= False
-        if self.tu.point_distance(self.tp.vertex_c):
+        if self.tu.point_distance(self.tp.vertex_c)<5:
             control= True
         else:
             control= False
-        if self.tp.point_distance(self.to.vertex_c):
+        if self.tp.point_distance(self.to.vertex_c)<5:
             control= True
         else:
             control= False
-        if self.to.point_distance(self.ts.vertex_c):
+        if self.to.point_distance(self.ts.vertex_c)<5:
             control= True
         else:
             control= False
-        if self.ts.point_distance(self.ta.vertex_c):
+        if self.ts.point_distance(self.ta.vertex_c)<5:
             control= True
         else:
             control= False
-        if self.tq.point_distance(self.tg.vertex_c):
+        if self.tq.point_distance(self.tg.vertex_c)<5:
             control= True
         else:
             control= False
-        if self.ts.point_distance(self.to.vertex_c):
+        if self.ts.point_distance(self.to.vertex_c)<5:
             control= True
         else:
             control= False
+        return control
         
 
     def check_button(self,mousePos):
