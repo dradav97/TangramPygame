@@ -21,7 +21,7 @@ clock = pygame.time.Clock()
 
 t = Triangle(Vertex([100, 500]), Vertex([700, 500]), Vertex([400, 100]), Vertex([400, 350]), screen)
 
-c = Quadrilateral(Vertex([10, 30]), Vertex([10, 80]), Vertex([90, 80]), Vertex([90, 30]), Vertex([10, 30]))
+c = Quadrilateral(Vertex([10, 30]), Vertex([10, 80]), Vertex([90, 80]), Vertex([90, 30]), Vertex([10, 30]), screen)
 
 while True:
     screen.fill(WHITE)
