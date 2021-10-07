@@ -8,13 +8,14 @@ from figures.Quadrilateral import Quadrilateral
 from figures.Vertex import Vertex
 import numpy as np
 from copy import deepcopy
+import time
 
 
 class TangramGame:
     def __init__ (self):
         # display settings
         pygame.init()
-        self.screen = pygame.display.set_mode((1000,900))
+        self.screen = pygame.display.set_mode((1600,900))
         pygame.display.set_caption("Tangram Game")
         self.clock = pygame.time.Clock()
         self.color = (230,230,230)
@@ -39,48 +40,70 @@ class TangramGame:
         self.play_button = Button(self,"Play")
         self.win_button = Button(self,"Felicitaciones has completado el tangram")
         #self.tq = Quadrilateral(Vertex([10, 30]), Vertex([10, 80]), Vertex([90, 80]), Vertex([90, 30]), Vertex([10, 30]), self.screen)
-        factor = 5
-        a = Vertex(np.array([0, 0]) * factor)
-        n = Vertex(np.array([50, 0]) * factor)
-        b = Vertex(np.array([100, 0]) * factor)
-        j = Vertex(np.array([25, 25]) * factor)
-        i = Vertex(np.array([75, 25]) * factor)
-        l = Vertex(np.array([0, 50]) * factor)
-        r = Vertex(np.array([25, 50]) * factor)
-        f = Vertex(np.array([50, 50]) * factor)
-        q = Vertex(np.array([75, 50]) * factor)
-        m = Vertex(np.array([100, 50]) * factor)
-        o = Vertex(np.array([25, 75]) * factor)
-        s = Vertex(np.array([50, 75]) * factor)
-        p = Vertex(np.array([75, 75]) * factor)
-        c = Vertex(np.array([0, 100]) * factor)
-        h = Vertex(np.array([25, 100]) * factor)
-        t = Vertex(np.array([50, 100]) * factor)
-        k = Vertex(np.array([75, 100]) * factor)
-        d = Vertex(np.array([100, 100]) * factor)
+        self.algo = True
+        self.factor = 5
+        self.lado = 90
+        self.arriba = 50
+        self.a = Vertex(np.array([self.lado+0,self.arriba+0]) * self.factor)
+        self.n = Vertex(np.array([self.lado+50, self.arriba+0]) * self.factor)
+        self.b = Vertex(np.array([self.lado+100,self.arriba+ 0]) * self.factor)
+        self.j = Vertex(np.array([self.lado+25, self.arriba+25]) * self.factor)
+        self.i = Vertex(np.array([self.lado+75,self.arriba+ 25]) * self.factor)
+        self.l = Vertex(np.array([self.lado+0,self.arriba+ 50]) * self.factor)
+        self.r = Vertex(np.array([self.lado+25, self.arriba+50]) * self.factor)
+        self.f = Vertex(np.array([self.lado+50,self.arriba+ 50]) * self.factor)
+        self.q = Vertex(np.array([self.lado+75,self.arriba+ 50]) * self.factor)
+        self.m = Vertex(np.array([self.lado+100,self.arriba+ 50]) * self.factor)
+        self.o = Vertex(np.array([self.lado+25,self.arriba+ 75]) * self.factor)
+        self.s = Vertex(np.array([self.lado+50,self.arriba+ 75]) * self.factor)
+        self.p = Vertex(np.array([self.lado+75,self.arriba+ 75]) * self.factor)
+        self.c = Vertex(np.array([self.lado+0, self.arriba+100]) * self.factor)
+        self.h = Vertex(np.array([self.lado+25,self.arriba+ 100]) * self.factor)
+        self.t = Vertex(np.array([self.lado+50,self.arriba+ 100]) * self.factor)
+        self.k = Vertex(np.array([self.lado+75, self.arriba+100]) * self.factor)
+        self.d = Vertex(np.array([self.lado+100,self.arriba+ 100]) * self.factor)
 
-        self.tq = Triangle(deepcopy(a), deepcopy(j), deepcopy(n), deepcopy(a), self.screen, self.GREEN)
-        self.tw = Triangle(deepcopy(n), deepcopy(i), deepcopy(b), deepcopy(n), self.screen, self.RED)
-        self.ty = Triangle(deepcopy(j), deepcopy(r), deepcopy(f), deepcopy(j), self.screen, self.BLUE)
-        self.tu = Triangle(deepcopy(i), deepcopy(f), deepcopy(q), deepcopy(i), self.screen, self.BLUE)
-        self.ti = Triangle(deepcopy(r), deepcopy(o), deepcopy(f), deepcopy(r), self.screen, self.VIOLET)
-        self.to = Triangle(deepcopy(f), deepcopy(p), deepcopy(q), deepcopy(f), self.screen, self.VIOLET)
-        self.tp = Triangle(deepcopy(f), deepcopy(o), deepcopy(p), deepcopy(f), self.screen, self.BLUE)
-        self.ta = Triangle(deepcopy(l), deepcopy(c), deepcopy(o), deepcopy(l), self.screen, self.RED)
-        self.ts = Triangle(deepcopy(o), deepcopy(c), deepcopy(h), deepcopy(o), self.screen, self.BLUE)
 
-        self.tr = Quadrilateral(deepcopy(n), deepcopy(j), deepcopy(f), deepcopy(i), deepcopy(n), self.screen,self.ORANGE)
-        self.te = Quadrilateral(deepcopy(a), deepcopy(l), deepcopy(o), deepcopy(j), deepcopy(a), self.screen,self.YELLOW)
-        self.tt = Quadrilateral(deepcopy(b), deepcopy(i), deepcopy(p), deepcopy(m), deepcopy(b), self.screen,self.GREEN )
-        self.td = Quadrilateral(deepcopy(o), deepcopy(h), deepcopy(t), deepcopy(s), deepcopy(o), self.screen,self.GREEN)
-        self.tf = Quadrilateral(deepcopy(s), deepcopy(t), deepcopy(k), deepcopy(p), deepcopy(s), self.screen,self.RED)
-        self.tg = Quadrilateral(deepcopy(m), deepcopy(p), deepcopy(k), deepcopy(d), deepcopy(d), self.screen,self.YELLOW)
+        self.tq = Triangle(deepcopy(self.a), deepcopy(self.j), deepcopy(self.n), deepcopy(self.a), self.screen, self.GREEN)
+        self.tw = Triangle(deepcopy(self.n), deepcopy(self.i), deepcopy(self.b), deepcopy(self.n), self.screen, self.RED)
+        self.ty = Triangle(deepcopy(self.j), deepcopy(self.r), deepcopy(self.f), deepcopy(self.j), self.screen, self.BLUE)
+        self.tu = Triangle(deepcopy(self.i), deepcopy(self.f), deepcopy(self.q), deepcopy(self.i), self.screen, self.BLUE)
+        self.ti = Triangle(deepcopy(self.r), deepcopy(self.o), deepcopy(self.f), deepcopy(self.r), self.screen, self.VIOLET)
+        self.to = Triangle(deepcopy(self.f), deepcopy(self.p), deepcopy(self.q), deepcopy(self.f), self.screen, self.VIOLET)
+        self.tp = Triangle(deepcopy(self.f), deepcopy(self.o), deepcopy(self.p), deepcopy(self.f), self.screen, self.BLUE)
+        self.ta = Triangle(deepcopy(self.l), deepcopy(self.c), deepcopy(self.o), deepcopy(self.l), self.screen, self.RED)
+        self.ts = Triangle(deepcopy(self.o), deepcopy(self.c), deepcopy(self.h), deepcopy(self.o), self.screen, self.BLUE)
+
+        self.tr = Quadrilateral(deepcopy(self.n), deepcopy(self.j), deepcopy(self.f), deepcopy(self.i), deepcopy(self.n), self.screen,self.ORANGE)
+        self.te = Quadrilateral(deepcopy(self.a), deepcopy(self.l), deepcopy(self.o), deepcopy(self.j), deepcopy(self.a), self.screen,self.YELLOW)
+        self.tt = Quadrilateral(deepcopy(self.b), deepcopy(self.i), deepcopy(self.p), deepcopy(self.m), deepcopy(self.b), self.screen,self.GREEN )
+        self.td = Quadrilateral(deepcopy(self.o), deepcopy(self.h), deepcopy(self.t), deepcopy(self.s), deepcopy(self.o), self.screen,self.GREEN)
+        self.tf = Quadrilateral(deepcopy(self.s), deepcopy(self.t), deepcopy(self.k), deepcopy(self.p), deepcopy(self.s), self.screen,self.RED)
+        self.tg = Quadrilateral(deepcopy(self.m), deepcopy(self.p), deepcopy(self.k), deepcopy(self.d), deepcopy(self.m), self.screen,self.YELLOW)
+
+        self.f1 = [
+            [self.tq, self.a],
+            [self.tw, self.n],
+            [self.ty, self.j],
+            [self.tu, self.i],
+            [self.ti, self.r],
+            [self.to, self.f],
+            [self.tp, self.f],
+            [self.ta, self.l],
+            [self.ts, self.o],
+            [self.tr, self.n],
+            [self.te, self.a],
+            [self.tt, self.b],
+            [self.td, self.o],
+            [self.tf, self.s],
+            [self.tg, self.m],
+            ]
     
     def run_game(self):
         # 
         while True:
             # time of frames
-            self.clock.tick(60)
+            self.clock.tick(5)
             
             
             
@@ -338,22 +361,24 @@ class TangramGame:
             #draw button
             self.play_button.draw_button()
             
-
+            
             if self.game_activated:
                 # game operation
+                
                 self.screen.fill(self.color)
                 self.interface()
                 #draw tq
                 self.draw_tqs()
                 
-        
+                for i in self.f1:
+                    self.validateCard(i[0],i[1])
 
-            
-            
-            
 
             # Update the full display Surface to the screen
+            
             pygame.display.flip()
+            
+            
 
 
     def draw_tqs(self):
@@ -378,9 +403,31 @@ class TangramGame:
     def interface(self):
         # screen 800,500
         # 800 - 200
-        pygame.draw.rect(self.screen,self.color_brown, [800, 0, 200, 900], 0)
+        #pygame.draw.rect(self.screen,self.color_brown, [800, 0, 200, 900], 0)
+        pygame.draw.rect(self.screen,self.color_brown, [90*self.factor, 50*self.factor, 100*self.factor+2, 100* self.factor+2],1)
         
-        pass
+    def validateCard(self, card, pos_final):
+        
+        
+        if card.center.x > pos_final.x:
+            card.move_l
+
+        if card.center.y > pos_final.y:
+            card.move_u
+        
+        if card.center.x < pos_final.x:
+            card.move_r
+
+        if card.center.y < pos_final.y:
+            card.move_d
+
+            
+            
+
+        
+        
+
+        
 
     def validate(self):
         control = False
