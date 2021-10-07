@@ -4,21 +4,39 @@ from figures.Vertex import Vertex
 import pygame
 import random as rm
 import math
-
+from copy import deepcopy
 
 class Triangle:
 
-    def __init__(self, vertex_a, vertex_b, vertex_c, center, screen, color):
-
+    def __init__(self, vertex_a, vertex_b, vertex_c, center, screen, color, name):
+        self.name = name
+        self.origin_a = deepcopy(vertex_a)
+        self.origin_b = deepcopy(vertex_b)
+        self.origin_c = deepcopy(vertex_c)
+        self.origin_center = deepcopy(center)
         self._vertex_a = vertex_a
         self._vertex_b = vertex_b
         self._vertex_c = vertex_c
         self._center = center
         self.screen = screen
         self.delta = 10
+        self.range =5
         self.color = color
         self.pos_random()
         self.control= False
+
+    def toOrigin(self):
+        self._vertex_a.x = self.origin_a.x
+        self._vertex_a.y = self.origin_a.y
+        self._vertex_b.x = self.origin_b.x
+        self._vertex_b.y = self.origin_b.y
+        self._vertex_c.x = self.origin_c.x
+        self._vertex_c.y = self.origin_c.y
+        self._center.x = self.origin_center.x
+        self._center.y = self.origin_center.y
+    
+    def toString(self):
+        return str(self.vertex_a.x)+","+str(self.vertex_a.y)+"|"+str(self.vertex_b.x)+","+str(self.vertex_b.y)+"|"+str(self.vertex_c.x)+","+str(self.vertex_c.y)
 
     def rotate(self):
         grades= 1.5708
@@ -35,8 +53,8 @@ class Triangle:
         pygame.draw.polygon(self.screen, self.color, (self.vertex_a.vertex, self.vertex_b.vertex, self.vertex_c.vertex))
     
     def pos_random(self):
-        rx = rm.randint(-50, 50)  *self.delta
-        ry = rm.randint(-50, 50) *self.delta
+        rx = rm.randint(self.range*(-1), self.range) * self.delta
+        ry = rm.randint(self.range*(-1), self.range) * self.delta
         
         self._vertex_a.x = self.vertex_a.x + rx
         self._vertex_b.x = self.vertex_b.x + rx
@@ -107,3 +125,7 @@ class Triangle:
     def point_distance(self, point2):
         d = math.pow(math.pow((self.vertex_a[0]-point2[0]),2)+math.pow((self.vertex_a[0]-point2[0]),2))
         return d
+        
+    @property
+    def origincenter(self):
+        return self.origin_center

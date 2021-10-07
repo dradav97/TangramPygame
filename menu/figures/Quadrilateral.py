@@ -3,14 +3,16 @@ from figures.Vertex import Vertex
 import pygame
 import random as rm
 import math
+from copy import deepcopy
 
 class Quadrilateral:
-    def __init__(self, vertex_a, vertex_b, vertex_c, vertex_d, center, screen, color):
-        self.origin_a = vertex_a
-        self.origin_b = vertex_b
-        self.origin_c = vertex_c
-        self.origin_d = vertex_d
-        self.origin_center = center
+    def __init__(self, vertex_a, vertex_b, vertex_c, vertex_d, center, screen, color, name):
+        self.name = name
+        self.origin_a = deepcopy(vertex_a)
+        self.origin_b = deepcopy(vertex_b)
+        self.origin_c = deepcopy(vertex_c)
+        self.origin_d = deepcopy(vertex_d)
+        self.origin_center = deepcopy(center)
         self._vertex_a = vertex_a
         self._vertex_b = vertex_b
         self._vertex_c = vertex_c
@@ -18,12 +20,12 @@ class Quadrilateral:
         self._center = center
         self.screen = screen
         self.delta = 10
+        self.range =5
         self.color = color
         self.pos_random()
         self.control= False
 
     def toOrigin(self):
-        print('entra')
         self._vertex_a.x = self.origin_a.x
         self._vertex_a.y = self.origin_a.y
         self._vertex_b.x = self.origin_b.x
@@ -44,6 +46,10 @@ class Quadrilateral:
         self.vertex_b = self.rotate_vertex(self.vertex_b.x-self.center.x, self.vertex_b.y-self.center.y, grades)
         self.vertex_c = self.rotate_vertex(self.vertex_c.x-self.center.x, self.vertex_c.y-self.center.y, grades)
         self.vertex_d = self.rotate_vertex(self.vertex_d.x - self.center.x, self.vertex_d.y - self.center.y, grades)
+    
+    def toString(self):
+        return str(self.vertex_a.x)+","+str(self.vertex_a.y)+"|"+str(self.vertex_b.x)+","+str(self.vertex_b.y)+"|"+str(self.vertex_c.x)+","+str(self.vertex_c.y)+"|"+str(self.vertex_d.x)+","+str(self.vertex_d.y)
+            
 
     def rotate_vertex(self, x, y, alpha):
         new_y = x*sin(alpha) + y*cos(alpha)
@@ -51,8 +57,8 @@ class Quadrilateral:
         return Vertex([new_x+self.center.x, new_y+self.center.y])
 
     def pos_random(self):
-        rx = rm.randint(-50, 50) * self.delta
-        ry = rm.randint(-50, 50) * self.delta
+        rx = rm.randint(self.range*(-1), self.range) * self.delta
+        ry = rm.randint(self.range*(-1), self.range) * self.delta
         #print(' '+str(rx)+'--'+str(ry))
         self._vertex_a.x = self.vertex_a.x + rx
         self._vertex_b.x = self.vertex_b.x + rx
@@ -112,6 +118,10 @@ class Quadrilateral:
     @property
     def center(self):
         return self._center
+    
+    @property
+    def origincenter(self):
+        return self.origin_center
 
     @vertex_a.setter
     def vertex_a(self, value):

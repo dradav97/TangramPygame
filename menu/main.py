@@ -8,7 +8,7 @@ from figures.Quadrilateral import Quadrilateral
 from figures.Vertex import Vertex
 import numpy as np
 from copy import deepcopy
-import time
+from files import read,write
 
 
 class TangramGame:
@@ -41,6 +41,7 @@ class TangramGame:
         self.win_button = Button(self,"Felicitaciones has completado el tangram")
         #self.tq = Quadrilateral(Vertex([10, 30]), Vertex([10, 80]), Vertex([90, 80]), Vertex([90, 30]), Vertex([10, 30]), self.screen)
         self.algo = True
+        self.terminado = True
         self.factor = 5
         self.lado = 90
         self.arriba = 50
@@ -64,22 +65,22 @@ class TangramGame:
         self.d = Vertex(np.array([self.lado+100,self.arriba+ 100]) * self.factor)
 
 
-        self.tq = Triangle(deepcopy(self.a), deepcopy(self.j), deepcopy(self.n), deepcopy(self.a), self.screen, self.GREEN)
-        self.tw = Triangle(deepcopy(self.n), deepcopy(self.i), deepcopy(self.b), deepcopy(self.n), self.screen, self.RED)
-        self.ty = Triangle(deepcopy(self.j), deepcopy(self.r), deepcopy(self.f), deepcopy(self.j), self.screen, self.BLUE)
-        self.tu = Triangle(deepcopy(self.i), deepcopy(self.f), deepcopy(self.q), deepcopy(self.i), self.screen, self.BLUE)
-        self.ti = Triangle(deepcopy(self.r), deepcopy(self.o), deepcopy(self.f), deepcopy(self.r), self.screen, self.VIOLET)
-        self.to = Triangle(deepcopy(self.f), deepcopy(self.p), deepcopy(self.q), deepcopy(self.f), self.screen, self.VIOLET)
-        self.tp = Triangle(deepcopy(self.f), deepcopy(self.o), deepcopy(self.p), deepcopy(self.f), self.screen, self.BLUE)
-        self.ta = Triangle(deepcopy(self.l), deepcopy(self.c), deepcopy(self.o), deepcopy(self.l), self.screen, self.RED)
-        self.ts = Triangle(deepcopy(self.o), deepcopy(self.c), deepcopy(self.h), deepcopy(self.o), self.screen, self.BLUE)
+        self.tq = Triangle(deepcopy(self.a), deepcopy(self.j), deepcopy(self.n), deepcopy(self.a), self.screen, self.GREEN,"tq")
+        self.tw = Triangle(deepcopy(self.n), deepcopy(self.i), deepcopy(self.b), deepcopy(self.n), self.screen, self.RED,"tw")
+        self.ty = Triangle(deepcopy(self.j), deepcopy(self.r), deepcopy(self.f), deepcopy(self.j), self.screen, self.BLUE,"ty")
+        self.tu = Triangle(deepcopy(self.i), deepcopy(self.f), deepcopy(self.q), deepcopy(self.i), self.screen, self.BLUE,"tu")
+        self.ti = Triangle(deepcopy(self.r), deepcopy(self.o), deepcopy(self.f), deepcopy(self.r), self.screen, self.VIOLET,"ti")
+        self.to = Triangle(deepcopy(self.f), deepcopy(self.p), deepcopy(self.q), deepcopy(self.f), self.screen, self.VIOLET,"to")
+        self.tp = Triangle(deepcopy(self.f), deepcopy(self.o), deepcopy(self.p), deepcopy(self.f), self.screen, self.BLUE,"tp")
+        self.ta = Triangle(deepcopy(self.l), deepcopy(self.c), deepcopy(self.o), deepcopy(self.l), self.screen, self.RED,"ta")
+        self.ts = Triangle(deepcopy(self.o), deepcopy(self.c), deepcopy(self.h), deepcopy(self.o), self.screen, self.BLUE,"ts")
 
-        self.tr = Quadrilateral(deepcopy(self.n), deepcopy(self.j), deepcopy(self.f), deepcopy(self.i), deepcopy(self.n), self.screen,self.ORANGE)
-        self.te = Quadrilateral(deepcopy(self.a), deepcopy(self.l), deepcopy(self.o), deepcopy(self.j), deepcopy(self.a), self.screen,self.YELLOW)
-        self.tt = Quadrilateral(deepcopy(self.b), deepcopy(self.i), deepcopy(self.p), deepcopy(self.m), deepcopy(self.b), self.screen,self.GREEN )
-        self.td = Quadrilateral(deepcopy(self.o), deepcopy(self.h), deepcopy(self.t), deepcopy(self.s), deepcopy(self.o), self.screen,self.GREEN)
-        self.tf = Quadrilateral(deepcopy(self.s), deepcopy(self.t), deepcopy(self.k), deepcopy(self.p), deepcopy(self.s), self.screen,self.RED)
-        self.tg = Quadrilateral(deepcopy(self.m), deepcopy(self.p), deepcopy(self.k), deepcopy(self.d), deepcopy(self.m), self.screen,self.YELLOW)
+        self.tr = Quadrilateral(deepcopy(self.n), deepcopy(self.j), deepcopy(self.f), deepcopy(self.i), deepcopy(self.n), self.screen,self.ORANGE,"tr")
+        self.te = Quadrilateral(deepcopy(self.a), deepcopy(self.l), deepcopy(self.o), deepcopy(self.j), deepcopy(self.a), self.screen,self.YELLOW,"te")
+        self.tt = Quadrilateral(deepcopy(self.b), deepcopy(self.i), deepcopy(self.p), deepcopy(self.m), deepcopy(self.b), self.screen,self.GREEN,"tt")
+        self.td = Quadrilateral(deepcopy(self.o), deepcopy(self.h), deepcopy(self.t), deepcopy(self.s), deepcopy(self.o), self.screen,self.GREEN,"td")
+        self.tf = Quadrilateral(deepcopy(self.s), deepcopy(self.t), deepcopy(self.k), deepcopy(self.p), deepcopy(self.s), self.screen,self.RED,"tf")
+        self.tg = Quadrilateral(deepcopy(self.m), deepcopy(self.p), deepcopy(self.k), deepcopy(self.d), deepcopy(self.m), self.screen,self.YELLOW,"tg")
 
         self.f1 = [
             [self.tq, self.a],
@@ -103,7 +104,7 @@ class TangramGame:
         # 
         while True:
             # time of frames
-            self.clock.tick(5)
+            self.clock.tick(1)
             
             
             
@@ -151,8 +152,9 @@ class TangramGame:
                     if event.key == pygame.K_g:
                         self.tg.control = True
                     if event.key == pygame.K_1:
+                        self.tr.toOrigin()
                         print("\n\nFelicitaciones completaste el tangram!!!!!!!\n\n")
-                        sys.exit()
+                        
 
                     
                     
@@ -407,19 +409,73 @@ class TangramGame:
         pygame.draw.rect(self.screen,self.color_brown, [90*self.factor, 50*self.factor, 100*self.factor+2, 100* self.factor+2],1)
         
     def validateCard(self, card, pos_final):
-        
-        
-        if card.center.x > pos_final.x:
-            card.move_l
+        if(self.terminado):
+            variable = read(card.name)
+            if(self.validatePreviosPoint(variable,card.center.vertex)):
+                card.toOrigin()
+            write(card.name,card.toString())
 
-        if card.center.y > pos_final.y:
-            card.move_u
-        
-        if card.center.x < pos_final.x:
-            card.move_r
+            
+            if card.center.x > pos_final.x:
+                card.move_l
 
-        if card.center.y < pos_final.y:
-            card.move_d
+            if card.center.y > pos_final.y:
+                card.move_u
+            
+            if card.center.x < pos_final.x:
+                card.move_r
+
+            if card.center.y < pos_final.y:
+                card.move_d
+
+        if (self.validateCardFinish()):
+            if self.terminado:
+                print('termino')
+                self.terminado = False
+
+    def validatePreviosPoint(self,arreglo, centro_comparar):
+        out = True
+        #print('------------------------------------------------------------------------')
+        #print(arreglo)
+        #print(len(arreglo))
+        #print(centro_comparar)
+        for i in range(len(arreglo)):
+            #print("$$")
+            #print(i)
+            #print("##")
+            #print(arreglo[i])
+            #print(arreglo[i][0])
+            #print(centro_comparar[0])
+            #print("##")
+            if (int(arreglo[i][0][0]==centro_comparar[0])):
+                if (int(arreglo[i][0][1]==centro_comparar[1])):
+                    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Se encontro una coincidencia @@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+
+                else:
+                    out = False
+            else:
+                out = False
+        #print('----------')
+        return out
+        
+        
+    def validateCardFinish (self):
+        out = True
+        for i in self.f1:
+            if(i[0].center.x == i[0].origincenter.x):
+                if(i[0].center.y == i[0].origincenter.y):
+                    pass
+                else:
+                    return False
+            else:
+                return False
+        return out
+                    
+    
+        
+
+                
+
 
             
             
