@@ -112,7 +112,7 @@ class TangramGame:
         start_ticks=pygame.time.get_ticks()
         while True:
             # time of frames
-            self.clock.tick(60)
+            self.clock.tick(3)
             
             
             
@@ -172,7 +172,7 @@ class TangramGame:
                         self.tg.control = True
                     if event.key == pygame.K_1:
                         for i in self.f1:
-                            i[0].pos_random()
+                            i[0].toOrigin()
                         #self.tr.toOrigin()
                         self.terminado = True
                         print("\n\nFelicitaciones completaste el tangram!!!!!!!\n\n")
@@ -398,19 +398,19 @@ class TangramGame:
                 if(self.validateCardFinish()):
                     if self.terminado:
                         self.api.set_status()
-                        print("oscar gano")
-                        break
+                        print("David gano")
+                        #break
                 body = self.api.get_status()
                 if(body["status"]):
                     print(f'{body["name"]} ya gano')
-                    break
+                    #break
 
 
-                """
+                
                 # esto es para que el programa juegue solo, o mas o menos era la idea
                 for i in self.f1:
                     self.validateCard(i[0],i[1])
-                """
+                
 
 
             # Update the full display Surface to the screen
@@ -449,12 +449,13 @@ class TangramGame:
         
     def validateCard(self, card, pos_final):
         if(self.terminado):
+            """
             variable = read(card.name)
             print('----------------------'+card.name)
             if(self.validatePreviosPoint(variable,card.center.vertex)):
                 card.toOrigin()
             write(card.name,card.toString())
-
+            """
             
             if card.center.x > pos_final.x:
                 card.move_l
@@ -471,8 +472,8 @@ class TangramGame:
         if (self.validateCardFinish()):
             if self.terminado:
                 print('termino')
-                print(self.nada)
-                self.terminado = False
+                #print(self.nada)
+                #self.terminado = False
 
     def validatePreviosPoint(self,arreglo, centro_comparar):
         out = True
