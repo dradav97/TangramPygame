@@ -16,6 +16,7 @@ class TangramGame:
         # display settings
         pygame.init()
         self.api = Api()
+        self.api.reset();
         self.screen = pygame.display.set_mode((1000,1000))
         pygame.display.set_caption("Tangram Game")
         self.clock = pygame.time.Clock()
@@ -38,7 +39,7 @@ class TangramGame:
         pygame.time.set_timer(pygame.USEREVENT, 1000)
         self.text_timer = ""
         self.flag = True
-        self.maquina = True
+        self.maquina = False
 
         # state game
         self.game_activated = False
@@ -114,7 +115,7 @@ class TangramGame:
         start_ticks=pygame.time.get_ticks()
         while True:
             # time of frames
-            self.clock.tick(3)
+            self.clock.tick(5)
             if self.flag:
                 if(self.api.all_ready()["ready"]==True):
                     self.game_activated = True
@@ -404,6 +405,7 @@ class TangramGame:
                         self.api.set_status()
                         #print("David gano")
                         self.terminado = False
+                        
                         #break
                 body = self.api.get_status()
                 if(body["status"]):
@@ -431,6 +433,7 @@ class TangramGame:
 """)
                     print(f'{body["name"]} ya gano')
                     self.terminado = False
+                    self.api.reset()
                     break
 
 
