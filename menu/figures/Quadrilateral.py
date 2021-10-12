@@ -20,7 +20,7 @@ class Quadrilateral:
         self._center = center
         self.screen = screen
         self.delta = 10
-        self.range =20
+        self.range = 20
         self.color = color
         self.pos_random()
         self.control= False
