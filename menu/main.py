@@ -9,13 +9,14 @@ from figures.Vertex import Vertex
 import numpy as np
 from copy import deepcopy
 from files import read,write
-
+from Api import Api
 
 class TangramGame:
     def __init__ (self):
         # display settings
         pygame.init()
-        self.screen = pygame.display.set_mode((1600,900))
+        self.api = Api()
+        self.screen = pygame.display.set_mode((1000,1000))
         pygame.display.set_caption("Tangram Game")
         self.clock = pygame.time.Clock()
         self.color = (230,230,230)
@@ -111,7 +112,7 @@ class TangramGame:
         start_ticks=pygame.time.get_ticks()
         while True:
             # time of frames
-            self.clock.tick(1)
+            self.clock.tick(60)
             
             
             
@@ -393,8 +394,16 @@ class TangramGame:
                 #draw tq
                 self.draw_tqs()
                 self.screen.blit(self.font.render(self.text_timer, True, (0, 0, 0)), (32, 48))
-                
-                
+
+                if(self.validateCardFinish()):
+                    if self.terminado:
+                        self.api.set_status()
+                        print("oscar gano")
+                        break
+                body = self.api.get_status()
+                if(body["status"]):
+                    print(f'{body["name"]} ya gano')
+                    break
 
 
                 """

@@ -20,7 +20,7 @@ class Triangle:
         self._center = center
         self.screen = screen
         self.delta = 10
-        self.range =5
+        self.range =1
         self.color = color
         self.pos_random()
         self.control= False
