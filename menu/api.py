@@ -1,5 +1,5 @@
 import requests as rq
-url = 'http://localhost:3000/status-game'
+url = 'https://c900-186-84-90-148.ngrok.io/status-game'
 
 def get_status():
     response = rq.get(url)

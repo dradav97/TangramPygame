@@ -21,6 +21,7 @@ class TangramGame:
         self.color = (230,230,230)
         self.color_brown = (103,77,77)
         self.color_black =(0,0,0)
+        self.font = pygame.font.SysFont('Consolas', 30)
 
         self.BLACK = (0, 0, 0)
         self.WHITE = (255, 255, 255)
@@ -30,6 +31,11 @@ class TangramGame:
         self.VIOLET = (125, 125, 125)
         self.YELLOW = (200, 0, 200)
         self.ORANGE = (200, 200, 0)
+
+        self.nada ='no entro'
+        self.contador_tiempo = 128
+        pygame.time.set_timer(pygame.USEREVENT, 1000)
+        self.text_timer = ""
 
         # state game
         self.game_activated = False
@@ -102,6 +108,7 @@ class TangramGame:
     
     def run_game(self):
         # 
+        start_ticks=pygame.time.get_ticks()
         while True:
             # time of frames
             self.clock.tick(1)
@@ -114,6 +121,17 @@ class TangramGame:
                 if event.type == pygame.QUIT:
                     sys.exit()
                 
+
+                # time event
+                if event.type == pygame.USEREVENT and self.game_activated: 
+                    if(self.contador_tiempo>=0):
+                        self.contador_tiempo -= 1
+                        #str( self.contador_tiempo ).rjust(3)
+                        minutes = str(self.contador_tiempo//60) if self.contador_tiempo//60>10 else "0"+str(self.contador_tiempo//60)
+                        seconds = str(self.contador_tiempo%60) if self.contador_tiempo%60>10 else "0"+str(self.contador_tiempo%60)
+                        operation = minutes + ':' + seconds
+                        self.text_timer = operation.rjust(3) if self.contador_tiempo > 0 else 'boom!'
+
                 # mouse event
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     # we get the mouse position
@@ -152,7 +170,10 @@ class TangramGame:
                     if event.key == pygame.K_g:
                         self.tg.control = True
                     if event.key == pygame.K_1:
-                        self.tr.toOrigin()
+                        for i in self.f1:
+                            i[0].pos_random()
+                        #self.tr.toOrigin()
+                        self.terminado = True
                         print("\n\nFelicitaciones completaste el tangram!!!!!!!\n\n")
                         
 
@@ -367,13 +388,20 @@ class TangramGame:
             if self.game_activated:
                 # game operation
                 
-                self.screen.fill(self.color)
+                self.screen.fill(self.color) 
                 self.interface()
                 #draw tq
                 self.draw_tqs()
+                self.screen.blit(self.font.render(self.text_timer, True, (0, 0, 0)), (32, 48))
                 
+                
+
+
+                """
+                # esto es para que el programa juegue solo, o mas o menos era la idea
                 for i in self.f1:
                     self.validateCard(i[0],i[1])
+                """
 
 
             # Update the full display Surface to the screen
@@ -407,10 +435,13 @@ class TangramGame:
         # 800 - 200
         #pygame.draw.rect(self.screen,self.color_brown, [800, 0, 200, 900], 0)
         pygame.draw.rect(self.screen,self.color_brown, [90*self.factor, 50*self.factor, 100*self.factor+2, 100* self.factor+2],1)
+        # self.screen = pygame.display.set_mode((1600,900))
+
         
     def validateCard(self, card, pos_final):
         if(self.terminado):
             variable = read(card.name)
+            print('----------------------'+card.name)
             if(self.validatePreviosPoint(variable,card.center.vertex)):
                 card.toOrigin()
             write(card.name,card.toString())
@@ -431,6 +462,7 @@ class TangramGame:
         if (self.validateCardFinish()):
             if self.terminado:
                 print('termino')
+                print(self.nada)
                 self.terminado = False
 
     def validatePreviosPoint(self,arreglo, centro_comparar):
@@ -439,23 +471,32 @@ class TangramGame:
         #print(arreglo)
         #print(len(arreglo))
         #print(centro_comparar)
+        
         for i in range(len(arreglo)):
             #print("$$")
             #print(i)
-            #print("##")
-            #print(arreglo[i])
+            print("##")
+            print(arreglo[i][0][0])
+            print(arreglo[i][0][1])
             #print(arreglo[i][0])
-            #print(centro_comparar[0])
-            #print("##")
-            if (int(arreglo[i][0][0]==centro_comparar[0])):
-                if (int(arreglo[i][0][1]==centro_comparar[1])):
-                    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Se encontro una coincidencia @@@@@@@@@@@@@@@@@@@@@@@@@@@@')
+            
+            
+            print('-------')
 
+            print(centro_comparar[0])
+            #print(arreglo[i][0])
+            print(centro_comparar[1])
+            print("##\n")
+            if (int(arreglo[i][0][0]==int(centro_comparar[0]))):
+                self.nada= 'entra a la primera'
+                if (int(arreglo[i][0][1]==int(centro_comparar[1]))):
+                    print('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Se encontro una coincidencia @@@@@@@@@@@@@@@@@@@@@@@@@@@@')
                 else:
                     out = False
             else:
                 out = False
         #print('----------')
+        
         return out
         
         
