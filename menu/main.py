@@ -37,6 +37,8 @@ class TangramGame:
         self.contador_tiempo = 128
         pygame.time.set_timer(pygame.USEREVENT, 1000)
         self.text_timer = ""
+        self.flag = True
+        self.maquina = True
 
         # state game
         self.game_activated = False
@@ -113,9 +115,11 @@ class TangramGame:
         while True:
             # time of frames
             self.clock.tick(3)
-            
-            
-            
+            if self.flag:
+                if(self.api.all_ready()["ready"]==True):
+                    self.game_activated = True
+                    self.flag = False
+
             # even loop
             for event in pygame.event.get():
                 #print(event)
@@ -399,17 +403,20 @@ class TangramGame:
                     if self.terminado:
                         self.api.set_status()
                         print("David gano")
+                        self.terminado = False
                         #break
                 body = self.api.get_status()
                 if(body["status"]):
                     print(f'{body["name"]} ya gano')
+                    self.terminado = False
                     #break
 
 
                 
                 # esto es para que el programa juegue solo, o mas o menos era la idea
-                for i in self.f1:
-                    self.validateCard(i[0],i[1])
+                if (self.maquina):
+                    for i in self.f1:
+                        self.validateCard(i[0],i[1])
                 
 
 
@@ -587,8 +594,8 @@ class TangramGame:
 
     def check_button(self,mousePos):
         if self.play_button.rect.collidepoint(mousePos):
+            self.api.set_ready()
             
-            self.game_activated = True
 
     def check_tqs(self, mousePos):
         pass
